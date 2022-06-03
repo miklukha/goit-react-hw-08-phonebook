@@ -41,10 +41,4 @@ export const GlobalStyles = css`
     background-color: transparent;
     cursor: pointer;
   }
-
-  ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
 `;
