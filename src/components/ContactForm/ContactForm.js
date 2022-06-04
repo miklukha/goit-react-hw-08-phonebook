@@ -2,9 +2,9 @@ import React from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import PropTypes from 'prop-types';
 
-export function ContactForm({ addItem }) {
+export function ContactForm({ onSubmit }) {
   return (
-    <Form onSubmit={addItem}>
+    <Form onSubmit={onSubmit}>
       <Label>
         Name
         <Input
@@ -15,7 +15,17 @@ export function ContactForm({ addItem }) {
           required
         />
       </Label>
-      <Button>Add contact</Button>
+      <Label>
+        Number
+        <Input
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+        />
+      </Label>
+      <Button type="submit">Add contact</Button>
     </Form>
   );
 }

@@ -41,4 +41,8 @@ export const GlobalStyles = css`
     background-color: transparent;
     cursor: pointer;
   }
+
+  ul {
+    margin-top: 0;
+  }
 `;
