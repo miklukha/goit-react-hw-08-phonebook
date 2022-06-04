@@ -7,12 +7,7 @@ import { Container, MainTitle, Title } from './App.styled';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -27,9 +22,9 @@ export class App extends Component {
     const id = this.nameInputId();
 
     this.setState(({ contacts }) => {
-      const existName = contacts.find(contact => contact.name === name);
+      const isExistName = contacts.find(contact => contact.name === name);
 
-      if (existName) {
+      if (isExistName) {
         alert(`${name} is already in contacts`);
         return;
       }
@@ -62,16 +57,15 @@ export class App extends Component {
   };
 
   render() {
+    const contacts = this.getVisibleContacts();
+
     return (
       <Container>
         <MainTitle>Phonebook</MainTitle>
         <ContactForm onSubmit={this.addContact} />
         <Title>Contacts</Title>
         <Filter onChange={this.changeFilter} />
-        <ContactList
-          contacts={this.getVisibleContacts()}
-          onClick={this.deleteContacts}
-        />
+        <ContactList contacts={contacts} onClick={this.deleteContacts} />
       </Container>
     );
   }

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Input } from 'components/ContactForm/ContactForm.styled';
 import { Text } from './Filter.styled';
 
@@ -9,3 +10,7 @@ export function Filter({ onChange }) {
     </>
   );
 }
+
+Filter.propTypes = {
+  onChange: PropTypes.func,
+};

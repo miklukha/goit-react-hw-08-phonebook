@@ -1,5 +1,5 @@
-import { List, Item, Data, DeleteButton } from './ContactList.styled';
 import PropTypes from 'prop-types';
+import { List, Item, Data, DeleteButton } from './ContactList.styled';
 
 export function ContactList({ contacts, onClick }) {
   return (
@@ -24,4 +24,5 @@ ContactList.propTypes = {
       number: PropTypes.string,
     })
   ),
+  onClick: PropTypes.func,
 };

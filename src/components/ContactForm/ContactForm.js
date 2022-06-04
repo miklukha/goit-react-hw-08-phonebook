@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Form, Label, Input, Button } from './ContactForm.styled';
-import PropTypes from 'prop-types';
 
 export function ContactForm({ onSubmit }) {
   return (
@@ -31,5 +31,5 @@ export function ContactForm({ onSubmit }) {
 }
 
 ContactForm.propTypes = {
-  addItem: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
