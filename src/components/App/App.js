@@ -22,7 +22,9 @@ export class App extends Component {
     const id = this.nameInputId();
 
     this.setState(({ contacts }) => {
-      const isExistName = contacts.find(contact => contact.name === name);
+      const isExistName = contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
 
       if (isExistName) {
         alert(`${name} is already in contacts`);
