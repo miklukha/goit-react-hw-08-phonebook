@@ -13,13 +13,12 @@ export class App extends Component {
 
   nameInputId = () => nanoid();
 
-  addContact = e => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-    const id = this.nameInputId();
+  addContact = ({ name, number }) => {
+    const contact = {
+      id: this.nameInputId(),
+      name,
+      number,
+    };
 
     this.setState(({ contacts }) => {
       const isExistName = contacts.find(
@@ -32,11 +31,9 @@ export class App extends Component {
       }
 
       return {
-        contacts: [{ name, number, id }, ...contacts],
+        contacts: [contact, ...contacts],
       };
     });
-
-    form.reset();
   };
 
   changeFilter = e => {
