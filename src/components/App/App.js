@@ -5,11 +5,28 @@ import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import { Container, MainTitle, Title } from './App.styled';
 
+const LS_KEY = 'contacts';
 export class App extends Component {
   state = {
     contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem(LS_KEY);
+
+    if (contacts) {
+      this.setState({
+        contacts: JSON.parse(contacts),
+      });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem(LS_KEY, JSON.stringify(this.state.contacts));
+    }
+  }
 
   nameInputId = () => nanoid();
 
