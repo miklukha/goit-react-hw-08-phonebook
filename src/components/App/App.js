@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
@@ -41,7 +43,7 @@ export function App() {
       );
 
       if (isExistName) {
-        alert(`${name} is already in contacts`);
+        toast.error(`${name} is already in contacts`);
         return state;
       }
 
@@ -74,6 +76,7 @@ export function App() {
       <Title>Contacts</Title>
       <Filter onChange={changeFilter} />
       <ContactList contacts={visibleContacts} onClick={deleteContacts} />
+      <ToastContainer autoClose={3000} />
     </Container>
   );
 }
