@@ -72,7 +72,7 @@ export function App() {
   return (
     <Container>
       <MainTitle>Phonebook</MainTitle>
-      <ContactForm onSubmit={addContact} />
+      <ContactForm addContact={addContact} />
       <Title>Contacts</Title>
       <Filter onChange={changeFilter} />
       <ContactList contacts={visibleContacts} onClick={deleteContacts} />
