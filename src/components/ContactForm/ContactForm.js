@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, Label, Input, Button } from './ContactForm.styled';
+import { useDispatch } from 'react-redux';
+import { add } from 'redux/store';
 
 export function ContactForm({ addContact }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -13,28 +12,33 @@ export function ContactForm({ addContact }) {
     reset,
   } = useForm();
 
+  // const onSubmit = data => {
+  //   const { name, number } = data;
+
+  //   addContact(name, number);
+  //   reset();
+  // };
+
   const onSubmit = data => {
     const { name, number } = data;
-
-    setName(name);
-    setNumber(number);
-    addContact(name, number);
-
+    dispatch(add({ name, number }));
+    // addContact(name, number);
     reset();
   };
 
   return (
+    // <Form onSubmit={() => dispatch(add())}>
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Label>
         Name
         <Input
           {...register('name', {
-            required: true,
-            pattern: {
-              value:
-                /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-              message: 'incorrect name',
-            },
+            // required: true,
+            // pattern: {
+            //   value:
+            //     /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+            //   message: 'incorrect name',
+            // },
           })}
         />
       </Label>
@@ -45,12 +49,12 @@ export function ContactForm({ addContact }) {
         Number
         <Input
           {...register('number', {
-            required: true,
-            pattern: {
-              value:
-                /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-              message: 'incorrect number',
-            },
+            // required: true,
+            // pattern: {
+            //   value:
+            //     /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+            //   message: 'incorrect number',
+            // },
           })}
         />
       </Label>

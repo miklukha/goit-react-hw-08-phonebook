@@ -1,21 +1,21 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { createSlice } from '@reduxjs/toolkit';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { createSlice } from '@reduxjs/toolkit';
 
-// Slice
-const clicksSlice = createSlice({
-  name: 'contacts',
-  initialState: { value: [] },
-  reducers: {
-    add(state, actions) {
-      return state;
-    },
-    // delete(state, actions) {
-    //   return state;
-    // },
-  },
-});
+// // Slice
+// const clicksSlice = createSlice({
+//   name: 'contacts',
+//   initialState: { value: [] },
+//   reducers: {
+//     add(state, actions) {
+//       return state;
+//     },
+//     // delete(state, actions) {
+//     //   return state;
+//     // },
+//   },
+// });
 
-export const clicksReducer = clicksSlice.reducer;
+// export const clicksReducer = clicksSlice.reducer;
 
 /**
  *    const contact = {
@@ -53,7 +53,7 @@ export const clicksReducer = clicksSlice.reducer;
 
 // export const clicksReducer = clicksSlice.reducer;
 
-export const { add } = clicksSlice.actions;
+// export const { add } = clicksSlice.actions;
 
 // // Selectors
 // export const getClicks = state => state.clicks.value;
