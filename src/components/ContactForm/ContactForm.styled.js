@@ -31,6 +31,7 @@ export const Input = styled.input`
 
   border: 1px solid #cccccc;
   border-radius: 10px;
+
   &:hover,
   &:focus {
     outline: none;
@@ -50,5 +51,16 @@ export const Button = styled.button`
   &:hover,
   &:focus {
     background-color: #e0e0de;
+  }
+`;
+
+export const Error = styled.p`
+  font-size: 12px;
+  color: #bf1650;
+  margin-bottom: 10px;
+
+  &::before {
+    display: inline;
+    content: '⚠ ';
   }
 `;

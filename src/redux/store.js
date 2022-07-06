@@ -1,51 +1,51 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { clicksReducer } from './clicksSlice';
 import { createAction, createReducer } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
+import { getContactsLS } from 'helpers/storage';
 
 export const add = createAction('contacts/add');
 export const remove = createAction('contacts/remove');
 
 // за кожну властивість відповідає окремий reducer
 const contactsReducer = createReducer([], {
-  [add]: (state, actions) => {
+  [add]: (state, { payload: { name, number } }) => {
     const contact = {
       id: nanoid(),
-      name: actions.payload.name,
-      number: actions.payload.number,
+      name: name,
+      number: number,
     };
 
-    return [contact, ...state];
+    const isExistName = state.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isExistName) {
+      toast.error(`${name} is already in contacts`);
+      return state;
+    }
+
+    state.push(contact);
   },
-  [remove]: (state, actions) => {
-    return state.filter(contact => contact.id !== actions.payload);
+  [remove]: (state, { payload }) => {
+    return state.filter(contact => contact.id !== payload);
   },
 });
 
-/**
- *     const contact = {
-      id: nameInputId(),
-      name,
-      number,
-    };
+export const change = createAction('filter/change');
 
-    setContacts(state => {
-      const isExistName = state.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      );
-
-      if (isExistName) {
-        toast.error(`${name} is already in contacts`);
-        return state;
-      }
-
-      return [contact, ...state];
-    });
- */
+const filterReducer = createReducer('', {
+  [change]: (state, { payload }) => {
+    return payload;
+  },
+});
 
 export const store = configureStore({
   reducer: {
     contacts: contactsReducer,
-    // filter: '',
+    filter: filterReducer,
   },
+  preloadedState: getContactsLS(),
 });

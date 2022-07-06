@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { Form, Label, Input, Button } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
 import { add } from 'redux/store';
+import { Form, Label, Input, Button, Error } from './ContactForm.styled';
 
-export function ContactForm({ addContact }) {
-  const dispatch = useDispatch();
+export function ContactForm() {
   const {
     register,
     handleSubmit,
@@ -12,54 +11,50 @@ export function ContactForm({ addContact }) {
     reset,
   } = useForm();
 
-  // const onSubmit = data => {
-  //   const { name, number } = data;
-
-  //   addContact(name, number);
-  //   reset();
-  // };
+  const dispatch = useDispatch();
 
   const onSubmit = data => {
     const { name, number } = data;
+
     dispatch(add({ name, number }));
-    // addContact(name, number);
     reset();
   };
 
   return (
-    // <Form onSubmit={() => dispatch(add())}>
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Label>
         Name
         <Input
           {...register('name', {
-            // required: true,
-            // pattern: {
-            //   value:
-            //     /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-            //   message: 'incorrect name',
-            // },
+            required: true,
+            pattern: {
+              value:
+                /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+              message:
+                "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
+            },
           })}
         />
       </Label>
       {errors?.name && (
-        <span>{errors?.name?.message ?? 'This field is required'}</span>
+        <Error>{errors?.name?.message || 'This field is required'}</Error>
       )}
       <Label>
         Number
         <Input
           {...register('number', {
-            // required: true,
-            // pattern: {
-            //   value:
-            //     /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-            //   message: 'incorrect number',
-            // },
+            required: true,
+            pattern: {
+              value:
+                /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+              message:
+                'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+            },
           })}
         />
       </Label>
       {errors?.number && (
-        <span>{errors?.number?.message ?? 'This field is required'}</span>
+        <Error>{errors?.number?.message || 'This field is required'}</Error>
       )}
       <Button type="submit">Add contact</Button>
     </Form>
