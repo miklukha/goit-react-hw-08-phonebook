@@ -3,7 +3,9 @@ import { List, Item, Data, DeleteButton } from './ContactList.styled';
 import { remove } from 'redux/store';
 import { useDispatch } from 'react-redux';
 
-export function ContactList({ contacts, onClick }) {
+console.log(remove);
+
+export function ContactList({ contacts }) {
   const dispatch = useDispatch();
 
   return (
