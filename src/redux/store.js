@@ -1,9 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  createSlice,
+  combineReducers,
+} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { getContactsLS } from 'helpers/storage';
+
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -35,6 +50,16 @@ const contactsSlice = createSlice({
 
 export const { add, remove } = contactsSlice.actions;
 
+const contactsPersistConfig = {
+  key: 'contacts',
+  storage,
+};
+
+const persistedReducer = persistReducer(
+  contactsPersistConfig,
+  combineReducers({ contacts: contactsSlice.reducer })
+);
+
 const filterSlice = createSlice({
   name: 'filter',
   initialState: '',
@@ -48,8 +73,14 @@ export const { change } = filterSlice.actions;
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsSlice.reducer,
+    contacts: persistedReducer,
     filter: filterSlice.reducer,
   },
-  preloadedState: getContactsLS(),
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
 });
+
+export const persistor = persistStore(store);

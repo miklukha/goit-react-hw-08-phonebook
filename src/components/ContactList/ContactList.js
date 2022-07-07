@@ -2,15 +2,26 @@ import PropTypes from 'prop-types';
 import { List, Item, Data, DeleteButton } from './ContactList.styled';
 import { remove } from 'redux/store';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-console.log(remove);
-
-export function ContactList({ contacts }) {
+export function ContactList() {
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.filter);
+
+  const getVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  const visibleContacts = getVisibleContacts();
 
   return (
     <List>
-      {contacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ id, name, number }) => (
         <Item key={id}>
           <Data>
             {name}: {number}

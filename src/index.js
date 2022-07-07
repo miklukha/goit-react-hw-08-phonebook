@@ -1,25 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'modern-normalize';
 import { Global } from '@emotion/react';
-import { GlobalStyles } from 'styles/GlobalStyles';
-import { App } from 'components/App';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
-import { setContactsLS } from 'helpers/storage';
-import { debounce } from 'debounce';
-
-store.subscribe(
-  debounce(() => {
-    setContactsLS(store.getState().contacts);
-  }, 100)
-);
+import { PersistGate } from 'redux-persist/integration/react';
+import 'modern-normalize';
+import { store, persistor } from 'redux/store';
+import { App } from 'components/App';
+import { GlobalStyles } from 'styles/GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Global styles={GlobalStyles} />
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
