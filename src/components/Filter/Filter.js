@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { change } from 'redux/filter/slice';
 import { Input } from 'components/ContactForm/ContactForm.styled';
 import { Text } from './Filter.styled';
-import { useDispatch } from 'react-redux';
-import { change } from 'redux/store';
 
-export function Filter({ onChange }) {
+export function Filter() {
   const dispatch = useDispatch();
 
   return (
@@ -17,7 +16,3 @@ export function Filter({ onChange }) {
     </>
   );
 }
-
-Filter.propTypes = {
-  onChange: PropTypes.func,
-};

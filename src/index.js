@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Global } from '@emotion/react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Global } from '@emotion/react';
 import 'modern-normalize';
 import { store, persistor } from 'redux/store';
 import { App } from 'components/App';
