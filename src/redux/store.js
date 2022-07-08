@@ -28,17 +28,20 @@ const middleware = [
 const contactsPersistConfig = {
   key: 'contacts',
   storage,
+  blacklist: ['filter'],
 };
 
 const persistedReducer = persistReducer(
   contactsPersistConfig,
-  combineReducers({ contacts: contactsSlice.reducer })
+  combineReducers({
+    contacts: contactsSlice.reducer,
+    filter: filterSlice.reducer,
+  })
 );
 
 export const store = configureStore({
   reducer: {
     contacts: persistedReducer,
-    filter: filterSlice.reducer,
   },
   middleware,
 });
