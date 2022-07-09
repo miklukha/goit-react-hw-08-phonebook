@@ -42,7 +42,9 @@ export function ContactForm() {
       <Label>
         Number
         <Input
+          type="tel"
           {...register('number', {
+            type: 'tel',
             required: true,
             pattern: {
               value:
