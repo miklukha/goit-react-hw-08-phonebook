@@ -1,7 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getContacts } from 'redux/contacts/getContacts';
 import { add } from 'redux/contacts/slice';
-import { Form, Label, Input, Button, Error } from './ContactForm.styled';
+import { Button, Error, Form, Input, Label } from './ContactForm.styled';
 
 export function ContactForm() {
   const {
@@ -12,9 +15,20 @@ export function ContactForm() {
   } = useForm();
 
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const onSubmit = data => {
     const { name, number } = data;
+
+    const isExistName = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isExistName) {
+      toast.error(`${name} is already in contacts`);
+      reset();
+      return;
+    }
 
     dispatch(add({ name, number }));
     reset();

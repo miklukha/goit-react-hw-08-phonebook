@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
@@ -13,15 +11,6 @@ export const contactsSlice = createSlice({
         name: name,
         number: number,
       };
-
-      const isExistName = state.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      );
-
-      if (isExistName) {
-        toast.error(`${name} is already in contacts`);
-        return state;
-      }
 
       state.push(contact);
     },
