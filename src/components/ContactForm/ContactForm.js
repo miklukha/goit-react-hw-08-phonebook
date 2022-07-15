@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getContacts } from 'redux/contacts/getContacts';
-import { add } from 'redux/contacts/slice';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from 'redux/contacts/slice';
 import { Button, Error, Form, Input, Label } from './ContactForm.styled';
 
 export function ContactForm() {
@@ -14,23 +15,29 @@ export function ContactForm() {
     reset,
   } = useForm();
 
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const { data: contacts } = useGetContactsQuery();
+  const [addContact] = useAddContactMutation();
 
-  const onSubmit = data => {
-    const { name, number } = data;
+  const onSubmit = async data => {
+    const { name } = data;
 
     const isExistName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (isExistName) {
-      toast.error(`${name} is already in contacts`);
+      toast.info(`${name} is already in contacts`);
       reset();
       return;
     }
 
-    dispatch(add({ name, number }));
+    try {
+      await addContact(data);
+      toast.success('Contact has added');
+    } catch (error) {
+      toast.error('Error when adding material');
+      console.log(error);
+    }
     reset();
   };
 
@@ -57,7 +64,7 @@ export function ContactForm() {
         Number
         <Input
           type="tel"
-          {...register('number', {
+          {...register('phone', {
             type: 'tel',
             required: true,
             pattern: {

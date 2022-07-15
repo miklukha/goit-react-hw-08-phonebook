@@ -1,24 +1,28 @@
-import { useDispatch } from 'react-redux';
-import { remove } from 'redux/contacts/slice';
+import { useDeleteContactMutation } from 'redux/contacts/slice';
 import { useContacts } from 'redux/contacts/useContacts';
-import { List, Item, Data, DeleteButton } from './ContactList.styled';
+import { Name, Phone, DeleteButton, Item, List } from './ContactList.styled';
 
 export function ContactList() {
-  const dispatch = useDispatch();
-  const { contacts } = useContacts();
+  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+  const contacts = useContacts();
 
   return (
-    <List>
-      {contacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          <Data>
-            {name}: {number}
-          </Data>
-          <DeleteButton onClick={() => dispatch(remove(id))}>
-            Delete
-          </DeleteButton>
-        </Item>
-      ))}
-    </List>
+    contacts && (
+      <List>
+        {contacts.map(({ id, name, phone }) => (
+          <Item key={id}>
+            <Name>{name}: </Name>
+            <Phone>{phone}</Phone>
+            <DeleteButton
+              type="button"
+              disabled={isLoading}
+              onClick={() => deleteContact(id)}
+            >
+              Delete
+            </DeleteButton>
+          </Item>
+        ))}
+      </List>
+    )
   );
 }
