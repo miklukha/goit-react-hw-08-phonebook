@@ -1,19 +1,22 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ContactForm } from 'components/ContactForm';
-import { ContactList } from 'components/ContactList';
-import { Filter } from 'components/Filter';
-import { Container, MainTitle, Title } from './App.styled';
+import { Routes, Route } from 'react-router-dom';
+import { SharedLayout } from 'components/SharedLayout';
+import { Home } from 'pages/Home';
+import { Login } from 'pages/Login';
+import { Register } from 'pages/Register';
+import { Contacts } from 'pages/Contacts';
 
 export function App() {
   return (
-    <Container>
-      <MainTitle>Phonebook</MainTitle>
-      <ContactForm />
-      <Title>Contacts</Title>
-      <Filter />
-      <ContactList />
-      <ToastContainer autoClose={3000} />
-    </Container>
+    <>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
