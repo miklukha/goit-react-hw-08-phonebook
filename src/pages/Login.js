@@ -12,8 +12,15 @@ export function Login() {
 
   return (
     <>
-      <h1>Login</h1>
-      <form>
+      <h1 style={{ marginBottom: '20px' }}>Login</h1>
+      <form
+        style={{
+          marginBottom: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+        }}
+      >
         <label>
           E-mail
           <input />
@@ -22,9 +29,11 @@ export function Login() {
           Password
           <input />
         </label>
-        <button type="submit">Sing In</button>
+        <button type="submit" style={{ width: '90px' }}>
+          Sing In
+        </button>
       </form>
-      <p>Don't have an account?</p>
+      <span>Don't have an account?</span>
       <Link to="/register">Sing up</Link>
     </>
   );

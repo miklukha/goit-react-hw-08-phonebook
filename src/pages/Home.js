@@ -1,17 +1,27 @@
+import { Container } from 'components/Container';
+import { Link } from 'components/SharedLayout/SharedLayout.styled';
+
 export function Home() {
+  const isLoggedIn = true;
+
   return (
-    <>
-      <h1>The Contacts Book is a good service used to store your contacts.</h1>
-      <p>
+    <Container>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>
+        The Contacts Book is a good service used to store your contacts.
+      </h1>
+      <p style={{ textAlign: 'center', marginBottom: '20px' }}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur,
         dicta! A alias dolorum maxime tempore animi nemo ipsa minima nam
         inventore, ullam officia, magnam aliquid. Vel cum consectetur commodi
         voluptates.
       </p>
-      <button type="button" style={{ border: '1px solid black' }}>
+      <Link
+        to={isLoggedIn ? '/contacts' : '/login'}
+        style={{ border: '1px solid black', borderRadius: '10px' }}
+      >
         Try now
-      </button>
-    </>
+      </Link>
+    </Container>
   );
 }
 

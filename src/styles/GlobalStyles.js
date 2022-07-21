@@ -33,14 +33,14 @@ export const GlobalStyles = css`
     margin: 0;
   }
 
-  button {
+  /* button {
     padding: 0;
     border: none;
     font: inherit;
     color: inherit;
     background-color: transparent;
     cursor: pointer;
-  }
+  } */
 
   ul {
     margin-top: 0;

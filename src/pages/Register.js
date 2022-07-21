@@ -1,12 +1,17 @@
-// форма реєстрації і внизу, "якщо вже маєте акаунт, то на форму логіну"
-
 import { Link } from 'components/SharedLayout/SharedLayout.styled';
 
 export function Register() {
   return (
     <>
-      <h1>Login</h1>
-      <form>
+      <h1 style={{ marginBottom: '20px' }}>Register</h1>
+      <form
+        style={{
+          marginBottom: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+        }}
+      >
         <label>
           Name
           <input />
@@ -19,9 +24,11 @@ export function Register() {
           Password
           <input />
         </label>
-        <button type="submit">Sing Up</button>
+        <button type="submit" style={{ width: '90px' }}>
+          Sing Up
+        </button>
       </form>
-      <p>Have an account?</p>
+      <span>Have an account?</span>
       <Link to="/login">Sing in</Link>
     </>
   );

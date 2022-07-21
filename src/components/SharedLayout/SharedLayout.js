@@ -1,16 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import { Header, Link } from './SharedLayout.styled';
+import { Header } from './SharedLayout.styled';
+import { Navigation } from 'components/Navigation';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import { AuthNav } from 'components/AuthNav';
 
 export function SharedLayout() {
+  const isLoggedIn = false;
+
   return (
     <>
       <Header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/login">login</Link>
-          <Link to="/register">register</Link>
-          <Link to="/contacts">contacts</Link>
-        </nav>
+        <Navigation />
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </Header>
       <Outlet />
     </>
