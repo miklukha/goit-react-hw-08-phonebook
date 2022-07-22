@@ -1,10 +1,17 @@
-import { useDeleteContactMutation } from 'redux/contacts/slice';
-import { useContacts } from 'redux/contacts/useContacts';
 import { Name, Phone, DeleteButton, Item, List } from './ContactList.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { getIsLoading, getVisibleContacts } from 'redux/contacts';
+import { useEffect } from 'react';
+import { contactsOperations } from 'redux/contacts';
 
 export function ContactList() {
-  const [deleteContact, { isLoading }] = useDeleteContactMutation();
-  const contacts = useContacts();
+  const dispatch = useDispatch();
+  const contacts = useSelector(getVisibleContacts);
+  const isLoading = useSelector(getIsLoading);
+
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
 
   return (
     contacts && (
@@ -16,7 +23,7 @@ export function ContactList() {
             <DeleteButton
               type="button"
               disabled={isLoading}
-              onClick={() => deleteContact(id)}
+              onClick={() => dispatch(contactsOperations.deleteContact(id))}
             >
               Delete
             </DeleteButton>

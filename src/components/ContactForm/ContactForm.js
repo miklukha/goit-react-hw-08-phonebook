@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  useAddContactMutation,
-  useGetContactsQuery,
-} from 'redux/contacts/slice';
 import { Button, Error, Form, Input, Label } from './ContactForm.styled';
+import { contactsOperations, getContacts } from 'redux/contacts';
 
 export function ContactForm() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+
   const {
     register,
     handleSubmit,
@@ -15,12 +16,8 @@ export function ContactForm() {
     reset,
   } = useForm();
 
-  const { data: contacts } = useGetContactsQuery();
-  const [addContact] = useAddContactMutation();
-
-  const onSubmit = async data => {
+  const onSubmit = data => {
     const { name } = data;
-
     const isExistName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -32,7 +29,7 @@ export function ContactForm() {
     }
 
     try {
-      await addContact(data);
+      dispatch(contactsOperations.addContact(data));
       toast.success('Contact has added');
     } catch (error) {
       toast.error('Error when adding material');
@@ -40,7 +37,6 @@ export function ContactForm() {
     }
     reset();
   };
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Label>

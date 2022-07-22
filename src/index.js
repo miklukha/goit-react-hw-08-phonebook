@@ -11,11 +11,11 @@ import { GlobalStyles } from 'styles/GlobalStyles';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Global styles={GlobalStyles} />
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 // <BrowserRouter basename="/goit-react-hw-05-movies/">

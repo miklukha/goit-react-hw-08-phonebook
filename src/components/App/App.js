@@ -1,11 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'components/SharedLayout';
-import { Home } from 'pages/Home';
-import { Login } from 'pages/Login';
-import { Register } from 'pages/Register';
-import { Contacts } from 'pages/Contacts';
+import { createAsyncComponent } from 'helpers/createAsyncComponent';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+
+const Home = createAsyncComponent('Home');
+const Login = createAsyncComponent('Login');
+const Register = createAsyncComponent('Register');
+const Contacts = createAsyncComponent('Contacts');
 
 export function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(authOperations.fetchCurrentUser());
+  // }, [dispatch]);
   return (
     <>
       <Routes>
