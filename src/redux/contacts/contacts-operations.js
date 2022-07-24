@@ -1,33 +1,4 @@
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import * as contactsAPI from 'services/contacts-api';
-
-// export const fetchContacts = createAsyncThunk(
-//   'contacts/fetchContacts',
-//   async (_, { rejectWithValue }) => {
-//     try {
-//       const contacts = await contactsAPI.fetchContacts();
-//       console.log(contacts);
-//       return contacts;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
 import axios from 'axios';
-// import {
-//   addTodoRequest,
-//   addTodoSuccess,
-//   addTodoError,
-//   deleteTodoRequest,
-//   deleteTodoSuccess,
-//   deleteTodoError,
-//   toggleCompletedRequest,
-//   toggleCompletedSuccess,
-//   toggleCompletedError,
-//   fetchTodosRequest,
-//   fetchTodosSuccess,
-//   fetchTodosError,
-// } from './todos-actions';
 import {
   fetchContactsRequest,
   fetchContactsSuccess,
@@ -40,9 +11,8 @@ import {
   deleteContactsError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'https://62ce7c73486b6ce826460c2d.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
-// GET @ /tasks
 const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
 
@@ -55,7 +25,6 @@ const fetchContacts = () => async dispatch => {
   }
 };
 
-// POST @ /tasks
 const addContact = data => dispatch => {
   dispatch(addContactsRequest());
 
@@ -74,23 +43,8 @@ const deleteContact = contactId => dispatch => {
     .catch(error => dispatch(deleteContactsError(error.message)));
 };
 
-// // PATCH @ /tasks/:id
-// const toggleCompleted =
-//   ({ id, completed }) =>
-//   dispatch => {
-//     const update = { completed };
-
-//     dispatch(toggleCompletedRequest());
-
-//     axios
-//       .patch(`/tasks/${id}`, update)
-//       .then(({ data }) => dispatch(toggleCompletedSuccess(data)))
-//       .catch(error => dispatch(toggleCompletedError(error.message)));
-//   };
-
 export const contactsOperations = {
   fetchContacts,
   addContact,
   deleteContact,
-  // toggleCompleted,
 };

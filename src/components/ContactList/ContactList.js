@@ -1,29 +1,26 @@
 import { Name, Phone, DeleteButton, Item, List } from './ContactList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { getIsLoading, getVisibleContacts } from 'redux/contacts';
-import { useEffect } from 'react';
+import { contactsSelectors } from 'redux/contacts';
 import { contactsOperations } from 'redux/contacts';
 
 export function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getVisibleContacts);
-  const isLoading = useSelector(getIsLoading);
+  const contacts = useSelector(contactsSelectors.getVisibleContacts);
+  const isLoading = useSelector(contactsSelectors.getIsLoading);
 
-  useEffect(() => {
-    dispatch(contactsOperations.fetchContacts());
-  }, [dispatch]);
+  const onDeleteContact = id => dispatch(contactsOperations.deleteContact(id));
 
   return (
     contacts && (
       <List>
-        {contacts.map(({ id, name, phone }) => (
+        {contacts.map(({ id, name, number }) => (
           <Item key={id}>
             <Name>{name}: </Name>
-            <Phone>{phone}</Phone>
+            <Phone>{number}</Phone>
             <DeleteButton
               type="button"
               disabled={isLoading}
-              onClick={() => dispatch(contactsOperations.deleteContact(id))}
+              onClick={() => onDeleteContact(id)}
             >
               Delete
             </DeleteButton>

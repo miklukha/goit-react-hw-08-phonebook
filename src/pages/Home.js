@@ -1,8 +1,10 @@
 import { Container } from 'components/Container';
 import { Link } from 'components/SharedLayout/SharedLayout.styled';
+import { useSelector } from 'react-redux';
+import { authSelectors } from 'redux/auth';
 
 export function Home() {
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   return (
     <Container>

@@ -3,11 +3,11 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Error, Form, Input, Label } from './ContactForm.styled';
-import { contactsOperations, getContacts } from 'redux/contacts';
+import { contactsOperations, contactsSelectors } from 'redux/contacts';
 
 export function ContactForm() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(contactsSelectors.getContacts);
 
   const {
     register,
@@ -60,7 +60,7 @@ export function ContactForm() {
         Number
         <Input
           type="tel"
-          {...register('phone', {
+          {...register('number', {
             type: 'tel',
             required: true,
             pattern: {

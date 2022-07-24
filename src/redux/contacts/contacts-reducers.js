@@ -18,8 +18,6 @@ const entities = createReducer([], {
   [addContactsSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactsSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-  // [toggleCompletedSuccess]: (state, { payload }) =>
-  //   state.map(todo => (todo.id === payload.id ? payload : todo)),
 });
 
 const isLoading = createReducer(false, {
@@ -32,9 +30,6 @@ const isLoading = createReducer(false, {
   [deleteContactsRequest]: () => true,
   [deleteContactsSuccess]: () => false,
   [deleteContactsError]: () => false,
-  // [toggleCompletedRequest]: () => true,
-  // [toggleCompletedSuccess]: () => false,
-  // [toggleCompletedError]: () => false,
 });
 
 const filter = createReducer('', {
@@ -43,7 +38,7 @@ const filter = createReducer('', {
 
 const error = createReducer(null, {});
 
-export default combineReducers({
+export const contactsReducer = combineReducers({
   entities,
   filter,
   isLoading,
