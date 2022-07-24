@@ -1,76 +1,93 @@
 // форма логіну і внизу, "якщо не маєте акаунту, то на форму реєстрації"
-import { Link } from 'components/SharedLayout/SharedLayout.styled';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+// import { Link } from 'components/Link/AuthLink.styled';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { authOperations } from 'redux/auth';
+import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
-// import { useForm } from 'react-hook-form';
+const theme = createTheme();
+
 export function Login() {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   reset,
-  // } = useForm();
-
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'email':
-        return setEmail(value);
-      case 'password':
-        return setPassword(value);
-      default:
-        return;
-    }
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      email: formData.get('email'),
+      password: formData.get('password'),
+    };
+    dispatch(authOperations.logIn(data));
   };
 
   return (
-    <>
-      <h1 style={{ marginBottom: '20px' }}>Login</h1>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          marginBottom: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-        }}
-      >
-        <label>
-          E-mail
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" style={{ width: '90px' }}>
-          Sing In
-        </button>
-      </form>
-      <span>Don't have an account?</span>
-      <Link to="/register">Sing up</Link>
-    </>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link component={RouterLink} to="/register" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
