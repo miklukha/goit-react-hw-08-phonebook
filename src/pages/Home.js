@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { authSelectors } from 'redux/auth';
 
 const theme = createTheme();
 
@@ -19,7 +19,6 @@ export function Home() {
       <CssBaseline />
       <Box
         sx={{
-          bgcolor: 'background.paper',
           pt: 8,
           pb: 6,
         }}

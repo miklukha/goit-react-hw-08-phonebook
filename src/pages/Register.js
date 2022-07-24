@@ -1,18 +1,16 @@
 // import { Link } from 'components/Link/AuthLink.styled';
-import Link from '@mui/material/Link';
-import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authOperations } from 'redux/auth';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
+import { authOperations } from 'redux/auth';
 
 const theme = createTheme();
 
@@ -106,47 +104,4 @@ export function Register() {
       </Container>
     </ThemeProvider>
   );
-
-  // return (
-  //   <>
-  //     <h1 style={{ marginBottom: '20px' }}>Register</h1>
-  //     <form
-  //       onSubmit={handleSubmit}
-  //       style={{
-  //         marginBottom: '20px',
-  //         display: 'flex',
-  //         flexDirection: 'column',
-  //         gap: '10px',
-  //       }}
-  //     >
-  //       <label>
-  //         Name
-  //         <input type="text" name="name" value={name} onChange={handleChange} />
-  //       </label>
-  //       <label>
-  //         E-mail
-  //         <input
-  //           type="email"
-  //           name="email"
-  //           value={email}
-  //           onChange={handleChange}
-  //         />
-  //       </label>
-  //       <label>
-  //         Password
-  //         <input
-  //           type="password"
-  //           name="password"
-  //           value={password}
-  //           onChange={handleChange}
-  //         />
-  //       </label>
-  //       <button type="submit" style={{ width: '90px' }}>
-  //         Sing Up
-  //       </button>
-  //     </form>
-  //     <span>Have an account?</span>
-  //     <Link to="/login">Sing in</Link>
-  //   </>
-  // );
 }

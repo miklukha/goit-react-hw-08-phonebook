@@ -1,17 +1,15 @@
-// форма логіну і внизу, "якщо не маєте акаунту, то на форму реєстрації"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-// import { Link } from 'components/Link/AuthLink.styled';
 import { useDispatch } from 'react-redux';
-import { authOperations } from 'redux/auth';
-import Link from '@mui/material/Link';
 import { Link as RouterLink } from 'react-router-dom';
+import { authOperations } from 'redux/auth';
 
 const theme = createTheme();
 
