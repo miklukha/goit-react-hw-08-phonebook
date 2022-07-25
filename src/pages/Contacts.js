@@ -63,7 +63,7 @@ export function Contacts() {
             color="text.primary"
             align="center"
           >
-            You already haven't contacts...
+            You haven't contacts yet...
           </Typography>
         )}
         <ToastContainer autoClose={3000} />
