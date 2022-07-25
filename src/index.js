@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <CssBaseline />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
+          <BrowserRouter basename="/goit-react-hw-05-movies/">
             <App />
           </BrowserRouter>
         </PersistGate>
@@ -25,4 +25,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ThemeProvider>
   </React.StrictMode>
 );
-// <BrowserRouter basename="/goit-react-hw-05-movies/">
