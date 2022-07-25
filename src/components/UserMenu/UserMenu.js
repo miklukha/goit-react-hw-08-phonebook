@@ -10,7 +10,7 @@ export function UserMenu() {
 
   return (
     <Stack direction="row" spacing={2}>
-      <Avatar sx={{ bgcolor: 'rgb(25, 118, 210)' }}>
+      <Avatar sx={{ bgcolor: 'rgb(23, 111, 203)' }}>
         {name[0].toUpperCase()}
       </Avatar>
 

@@ -16,7 +16,7 @@ export function Navigation() {
           mx: 1.5,
           textDecoration: 'none',
           '&:hover': { color: 'rgb(25, 118, 210)' },
-          '&:focus': { color: 'rgb(25, 118, 210)' },
+          '&:focus': { color: 'rgb(23, 111, 203)' },
         }}
       >
         Home
@@ -32,8 +32,8 @@ export function Navigation() {
           my: 1,
           mx: 1.5,
           textDecoration: 'none',
-          '&:hover': { color: 'rgb(25, 118, 210)' },
-          '&:focus': { color: 'rgb(25, 118, 210)' },
+          '&:hover': { color: 'rgb(23, 111, 203)' },
+          '&:focus': { color: 'rgb(23, 111, 203)' },
         }}
       >
         Contacts
