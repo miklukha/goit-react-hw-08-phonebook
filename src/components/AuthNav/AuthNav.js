@@ -1,50 +1,25 @@
-import { Link } from 'components/SharedLayout/SharedLayout.styled';
+import Button from '@mui/material/Button';
+import { Link as RouterLink } from 'react-router-dom';
 
 export function AuthNav() {
   return (
     <div>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
-    </div>
-  );
-}
-/**
- * import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-const styles = {
-  link: {
-    display: 'inline-block',
-    textDecoration: 'none',
-    padding: 12,
-    fontWeight: 700,
-    color: '#2A363B',
-  },
-  activeLink: {
-    color: '#E84A5F',
-  },
-};
-
-export default function AuthNav() {
-  return (
-    <div>
-      <NavLink
-        to="/register"
-        exact
-        style={styles.link}
-        activeStyle={styles.activeLink}
-      >
-        Регистрация
-      </NavLink>
-      <NavLink
+      <Button
+        component={RouterLink}
         to="/login"
-        exact
-        style={styles.link}
-        activeStyle={styles.activeLink}
+        variant="outlined"
+        sx={{ my: 1, mx: 1.5 }}
       >
-        Логин
-      </NavLink>
+        Login
+      </Button>
+      <Button
+        component={RouterLink}
+        to="/register"
+        variant="contained"
+        sx={{ my: 1, mx: 1.5 }}
+      >
+        Register
+      </Button>
     </div>
   );
 }
- */

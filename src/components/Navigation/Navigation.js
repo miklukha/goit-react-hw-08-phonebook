@@ -1,12 +1,43 @@
-import { Link } from 'components/SharedLayout/SharedLayout.styled';
+import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 
 export function Navigation() {
   return (
     <nav>
-      <Link to="/" style={{ marginRight: '20px' }}>
+      <Link
+        component={RouterLink}
+        to="/"
+        variant="button"
+        color="text.primary"
+        noWrap
+        sx={{
+          fontSize: '16px',
+          my: 1,
+          mx: 1.5,
+          textDecoration: 'none',
+          '&:hover': { color: 'rgb(25, 118, 210)' },
+          '&:focus': { color: 'rgb(25, 118, 210)' },
+        }}
+      >
         Home
       </Link>
-      <Link to="/contacts">Contacts</Link>
+      <Link
+        component={RouterLink}
+        to="/contacts"
+        variant="button"
+        color="text.primary"
+        noWrap
+        sx={{
+          fontSize: '16px',
+          my: 1,
+          mx: 1.5,
+          textDecoration: 'none',
+          '&:hover': { color: 'rgb(25, 118, 210)' },
+          '&:focus': { color: 'rgb(25, 118, 210)' },
+        }}
+      >
+        Contacts
+      </Link>
     </nav>
   );
 }
