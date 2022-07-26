@@ -1,4 +1,3 @@
-// import { Link } from 'components/Link/AuthLink.styled';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -6,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { authOperations } from 'redux/auth';
@@ -13,15 +13,9 @@ import { authOperations } from 'redux/auth';
 export function Register() {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm();
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      password: formData.get('password'),
-    };
+  const onSubmit = data => {
     dispatch(authOperations.register(data));
   };
 
@@ -38,7 +32,7 @@ export function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -49,6 +43,9 @@ export function Register() {
                 id="name"
                 label="Name"
                 autoFocus
+                {...register('name', {
+                  required: true,
+                })}
               />
             </Grid>
             <Grid item xs={12}>
@@ -59,6 +56,9 @@ export function Register() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                {...register('email', {
+                  required: true,
+                })}
               />
             </Grid>
             <Grid item xs={12}>
@@ -70,6 +70,9 @@ export function Register() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                {...register('password', {
+                  required: true,
+                })}
               />
             </Grid>
           </Grid>

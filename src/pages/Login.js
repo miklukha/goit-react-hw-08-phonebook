@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { authOperations } from 'redux/auth';
@@ -12,14 +13,9 @@ import { authOperations } from 'redux/auth';
 export function Login() {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const { register, handleSubmit } = useForm();
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      email: formData.get('email'),
-      password: formData.get('password'),
-    };
+  const onSubmit = data => {
     dispatch(authOperations.logIn(data));
   };
 
@@ -36,7 +32,7 @@ export function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -46,6 +42,9 @@ export function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            {...register('email', {
+              required: true,
+            })}
           />
           <TextField
             margin="normal"
@@ -56,6 +55,10 @@ export function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            {...register('password', {
+              type: 'tel',
+              required: true,
+            })}
           />
           <Button
             type="submit"
