@@ -17,9 +17,11 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     },
     [authOperations.logIn.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+      state.user = action.payload
+        ? action.payload.user
+        : alert('User not found');
+      state.token = action.payload && action.payload.token;
+      state.isLoggedIn = action.payload ? true : false;
     },
     [authOperations.logOut.fulfilled](state) {
       state.user = { name: null, email: null };
